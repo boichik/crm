@@ -72,7 +72,7 @@ export default {
   }),
   validations: {
     email: { email, required },
-    password: { required, minLength: minLength(8) }
+    password: { required, minLength: minLength(6) }
   },
   mounted () {
     if (messages[this.$route.query.message]) {
@@ -80,7 +80,7 @@ export default {
     }
   },
   methods: {
-    submitHandler () {
+    async submitHandler () {
       console.log(this.$v.$invalid)
       if (this.$v.$invalid) {
         this.$v.$touch()
@@ -90,8 +90,10 @@ export default {
         email: this.email,
         password: this.password
       }
-      console.log(formData)
-      this.$router.push('/')
+      try {
+        await this.$store.dispatch('login', formData)
+        this.$router.push('/')
+      } catch (e) {}
     }
   }
 }
