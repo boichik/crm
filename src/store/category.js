@@ -33,6 +33,17 @@ export default{
                  throw(e)
              }
         },
+        async deleteCategory({commit,dispatch},{id}){
+            try{
+                const uid = await dispatch('getUid')
+                await firebase.database().ref(`/users/${uid}/categories`).child(id).remove()
+                
+  
+             }catch(e){
+                 commit('setError',e)
+                 throw(e)
+             }
+        },
         async createCategory({commit,dispatch}, {title,limit}){
            try{
               const uid = await dispatch('getUid')

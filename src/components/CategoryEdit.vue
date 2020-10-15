@@ -50,7 +50,7 @@
                 Обновить
                 <i class="material-icons right">send</i>
                 </button>
-                <button class="btn waves-effect waves-light red cat-btb-del" type="submit">
+                <button class="btn waves-effect waves-light red cat-btb-del" type="button" v-on:click="deleteCat">
                 Удалить
                 <i class="material-icons right">clear</i>
                 </button>
@@ -119,8 +119,20 @@ export default {
 
         await this.$store.dispatch('updateCategory', categoryData)
         this.$message('Update succses')
-        this.$emit('updated', categoryData)
+        this.$emit('updated', categoryData, true)
       } catch (e) {}
+    },
+    async deleteCat(){
+        if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+      try{
+        const catDate = {id:this.current}
+        await this.$store.dispatch('deleteCategory', catDate)
+        this.$message('Delete succses')
+        this.$emit('updated', catDate, false)
+      }catch(e) {}
     }
   }
 }

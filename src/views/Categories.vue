@@ -40,11 +40,16 @@ export default {
     addNewCategory (category) {
       this.categories.push(category)
     },
-    updatedCategories (category) {
-      console.log(category)
+    async updatedCategories (category, isUpdate) {
       const idx = this.categories.findIndex(c => c.id === category.id)
-      this.categories[idx].title = category.title
-      this.categories[idx].limit = category.limit
+      if (!isUpdate) {
+        this.loading = true
+        this.categories = await this.$store.dispatch('fetchCategories')
+        this.loading = false
+      } else {
+        this.categories[idx].title = category.title
+        this.categories[idx].limit = category.limit
+      }
       this.updateCount++
     }
   }
