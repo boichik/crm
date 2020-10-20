@@ -24,7 +24,6 @@ import Navbar from '@/components/app/Navbar.vue'
 import Sidebar from '@/components/app/Sidebar.vue'
 import messages from '@/common/messages'
 
-
 export default {
   name: 'main-layout',
   data: () => ({
