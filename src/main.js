@@ -15,6 +15,8 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 
+import Paginate from 'vuejs-paginate'
+
 Vue.config.productionTip = false
 Vue.use(messagePlugin)
 Vue.use(Vuelidate)
@@ -23,6 +25,7 @@ Vue.filter('currency', currencyFilter)
 Vue.directive('tooltip', tooltipDirictive)
 
 Vue.component('Loader', Loader)
+Vue.component('Paginate', Paginate)
 
 firebase.initializeApp({
   apiKey: 'AIzaSyB0OW_Va5fDqDbbsPy2_G4JYcSW1vgoqzg',
